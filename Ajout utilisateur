@@ -1,0 +1,47 @@
+
+
+"""rechercher fontion"""
+def searchuser(biblios):
+    search = open(biblios, 'r')
+    f = search.readline()
+    w=input("Saisir votre recherche ici : ")
+    res = False
+    nb=0
+    liste=[]
+    for f in search :
+        if w in f :
+            res = True
+            print(f)
+            nb=nb+1
+    print("Votre recherche comporte ",nb,"résultats avec le mot '",w,"' :\n")
+    if res == False :
+        print("Aucun résultat.\n")
+    search.close()
+    return
+
+#_____________________________________ajouter fontion
+def adduser(biblios):
+    newuser=["le nom", "le postnom", "le prenom", "l'age", "'matricule"]
+    k=0
+    while k<5 :
+        n=input("Saisir " + newuser[k] + " de l'utilisateur : ")
+        newuser[k]=n
+        k=k+1
+    else :
+        v=input("Etes-vous sur d'entrer cet utilisateur ? oui/non ")
+        if v=="oui" :
+            fichier = open(biblios,'a')
+            fichier.write(str(newuser)+"\n")
+            fichier.close()
+            print(newuser[0]+" de "+newuser[1]+", ("+newuser[2]+", "+newuser[3]+"), "+" matricule: "+newuser[4]+" a été ajouté avec succès.")
+        elif v=="non" :
+            q=input("Voulez-vous entrer cet utilisateur à nouveau ? oui/non ")
+            if q=="oui" :
+                adduser(biblios)
+            elif q=="non" :
+                return
+        else :
+            print("Votre choix n'est ni un 'oui' ni un 'non'. Veuillez recommencer s'il vous plaît.")
+    return
+
+
